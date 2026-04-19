@@ -22,6 +22,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@azure/identity": "^4.13.1",
+    "@azure/playwright": "^1.1.4",
     "@playwright/mcp": "^0.0.70",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
