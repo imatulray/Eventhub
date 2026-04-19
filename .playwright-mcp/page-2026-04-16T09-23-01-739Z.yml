@@ -1,0 +1,88 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e61]:
+    - generic [ref=e63]:
+      - link "EventHub" [ref=e64] [cursor=pointer]:
+        - /url: /
+        - img [ref=e66]
+        - generic [ref=e68]: EventHub
+      - generic [ref=e69]:
+        - link "Home" [ref=e70] [cursor=pointer]:
+          - /url: /
+        - link "Events" [ref=e71] [cursor=pointer]:
+          - /url: /events
+        - link "My Bookings" [ref=e72] [cursor=pointer]:
+          - /url: /bookings
+        - link "API Docs" [ref=e73] [cursor=pointer]:
+          - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+        - button "Admin" [ref=e75] [cursor=pointer]:
+          - text: Admin
+          - img [ref=e76]
+        - generic [ref=e78]:
+          - generic "atulray@gmail.com" [ref=e79]
+          - button "Logout" [ref=e80] [cursor=pointer]
+  - main [ref=e81]:
+    - generic [ref=e421]:
+      - generic [ref=e422]:
+        - generic [ref=e423]:
+          - heading "Manage Bookings" [level=1] [ref=e424]
+          - paragraph [ref=e425]: 0 total bookings
+        - combobox [ref=e427] [cursor=pointer]:
+          - option "All Statuses" [selected]
+          - option "Confirmed"
+          - option "Cancelled"
+      - generic [ref=e429]:
+        - img [ref=e431]
+        - heading "No bookings found" [level=3] [ref=e433]
+        - paragraph [ref=e434]: There are no bookings matching your filters.
+  - contentinfo [ref=e175]:
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - generic [ref=e178]:
+          - heading "Rahul Shetty Academy" [level=3] [ref=e179]
+          - paragraph [ref=e180]: India's leading QA automation training academy — empowering engineers to build real-world testing skills.
+        - generic [ref=e181]:
+          - heading "Popular Courses" [level=3] [ref=e182]
+          - list [ref=e183]:
+            - listitem [ref=e184]:
+              - link "Selenium WebDriver with Java" [ref=e185] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e186]:
+              - link "Playwright with JavaScript" [ref=e187] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e188]:
+              - link "RestAssured API Testing" [ref=e189] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e190]:
+              - link "Cypress End-to-End Testing" [ref=e191] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e192]:
+              - link "Appium Mobile Testing" [ref=e193] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+        - generic [ref=e194]:
+          - heading "QA Job Hiring Platform" [level=3] [ref=e195]
+          - paragraph [ref=e196]: Get hired faster — take skill assessments trusted by top QA employers worldwide.
+          - link "techsmarthire.com →" [ref=e197] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+        - generic [ref=e198]:
+          - heading "EventHub Practice App" [level=3] [ref=e199]
+          - list [ref=e200]:
+            - listitem [ref=e201]:
+              - link "Browse Events" [ref=e202] [cursor=pointer]:
+                - /url: /events
+            - listitem [ref=e203]:
+              - link "My Bookings" [ref=e204] [cursor=pointer]:
+                - /url: /bookings
+            - listitem [ref=e205]:
+              - link "Manage Events" [ref=e206] [cursor=pointer]:
+                - /url: /admin/events
+            - listitem [ref=e207]:
+              - link "API Documentation" [ref=e208] [cursor=pointer]:
+                - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+      - generic [ref=e209]:
+        - paragraph [ref=e210]: © 2026 Rahul Shetty Academy. All rights reserved.
+        - generic [ref=e211]:
+          - link "rahulshettyacademy.com →" [ref=e212] [cursor=pointer]:
+            - /url: https://rahulshettyacademy.com
+          - link "techsmarthire.com →" [ref=e213] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+  - alert [ref=e60]

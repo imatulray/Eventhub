@@ -1,0 +1,36 @@
+{
+  "name": "aiautomationclaude",
+  "version": "1.0.0",
+  "description": "AI-ready Playwright Automation Framework with POM, Allure, and MCP",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "if exist allure-results rmdir /s /q allure-results",
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --project=chromium --project=firefox --project=webkit",
+    "test:api": "npx playwright test --project=api",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report:generate": "npx allure generate allure-results --clean -o allure-report",
+    "report:open": "npx allure open allure-report",
+    "report:show": "npx playwright show-report",
+    "mcp:start": "npx @playwright/mcp@latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.70",
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2",
+    "allure-commandline": "^2.38.1",
+    "allure-playwright": "^3.6.0",
+    "dotenv": "^17.4.0",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "@playwright/cli": "^0.1.1"
+  }
+}
