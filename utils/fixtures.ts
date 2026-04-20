@@ -8,8 +8,11 @@ export const loginTest = base.extend<{
 }>({
   loginPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
+    // Always navigate to login page to ensure clean state for each test
     await loginPage.goToLogin();
     await use(loginPage);
+    // Navigate back to login page after test to ensure next test starts clean
+    await loginPage.goToLogin();
   },
 
   clearUserSession: async ({ loginPage }, use) => {
