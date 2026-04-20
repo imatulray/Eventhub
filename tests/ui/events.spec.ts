@@ -9,7 +9,7 @@ test.describe('Events Page', () => {
 
     test("Event Page Test", async({loginPage, page}) => {
         eventsPage = new EventsPage(page);
-        loginPage.goToLogin();
+        await loginPage.goToLogin();
          console.log("Hello World");
     })
 
