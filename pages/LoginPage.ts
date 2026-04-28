@@ -16,6 +16,7 @@ export class LoginPage extends BasePage implements ILoginPage {
   readonly apiDocsLink: Locator;
   readonly heading: Locator;
   readonly subheading: Locator;
+  readonly logoutbtn: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -42,6 +43,8 @@ export class LoginPage extends BasePage implements ILoginPage {
     // ── Headings / text ──────────────────────────────────────────────────────
     this.heading = page.getByRole('heading', { name: 'Sign in to EventHub' });
     this.subheading = page.getByText('Enter your credentials to continue');
+
+    this.logoutbtn = page.getByTestId('logout-btn');
   }
 
   // ── Actions ──────────────────────────────────────────────────────────────
@@ -54,5 +57,16 @@ export class LoginPage extends BasePage implements ILoginPage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.signInButton.click();
+    // wait for navigation and for the logout button to appear as a sign of successful login
+    await this.page.waitForLoadState('networkidle');
+    try {
+      await this.logoutbtn.waitFor({ state: 'visible', timeout: 10000 });
+    } catch (err) {
+      // ignore: some flows may not show logout immediately
+    }
+  }
+
+  async logout(): Promise<void>{
+    await this.logoutbtn.click();
   }
 }

@@ -1,4 +1,4 @@
-
+import { Locator } from '@playwright/test';
 
 export interface IEventsPage {
   goToEventsPage(): Promise<void>;
@@ -6,4 +6,5 @@ export interface IEventsPage {
   selectCategory(category: string): Promise<void>;
   selectCity(city: string): Promise<void>;
   clickAddNewEvent(): Promise<void>;
+  bookEvent(options: { tickets?: number; fullName: string; email: string; phone: string; }): Promise<Locator>;
 }
