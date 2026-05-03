@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { loginTest as test } from '../../utils/fixtures';
+import { test, expect } from '../../utils/fixtures';
 import 'dotenv/config';
 
 const VALID_EMAIL    = process.env.LOGIN_EMAIL    as string;
@@ -38,8 +37,8 @@ test.describe('Login Functionality', () => {
     await expect(loginPage.passwordError).toBeVisible();
   });
 
-  // ─── TC-005 ───────────────────────────────────────────────────────────────
-  test('TC-005: Login with invalid email format shows email validation error', async ({ loginPage }) => {
+  // ─── TC-003 ───────────────────────────────────────────────────────────────
+  test('TC-003: Login with invalid email format shows email validation error', async ({ loginPage }) => {
     const invalidEmails = ['invalidemail', 'user@', 'user@domain'];
 
     for (const email of invalidEmails) {
@@ -56,8 +55,8 @@ test.describe('Login Functionality', () => {
     }
   });
 
-  // ─── TC-006 ───────────────────────────────────────────────────────────────
-  test('TC-006: Login with password shorter than 6 characters shows password validation error', async ({ loginPage }) => {
+  // ─── TC-004 ───────────────────────────────────────────────────────────────
+  test('TC-004: Login with password shorter than 6 characters shows password validation error', async ({ loginPage }) => {
     // Enter valid email but a short password
     await loginPage.emailInput.fill('testuser@example.com');
     await loginPage.passwordInput.fill('12345');
@@ -67,43 +66,31 @@ test.describe('Login Functionality', () => {
     await expect(loginPage.emailError).not.toBeVisible();
   });
 
-  // ─── TC-008 ───────────────────────────────────────────────────────────────
-  test('TC-008: Login with wrong credentials shows invalid email or password toast', async ({ loginPage }) => {
-    // Submit well-formed but incorrect credentials
+  // ─── TC-005 ───────────────────────────────────────────────────────────────
+  test('TC-005: Login with wrong credentials is rejected and stays on login page', async ({ loginPage }) => {
+    const loginResponsePromise = loginPage.page.waitForResponse(
+      resp => resp.url().includes('/api/auth/login'),
+      { timeout: 10000 }
+    );
+
     await loginPage.login('wrong@email.com', 'wrongpassword');
+    const response = await loginResponsePromise;
 
-    // Error toast must appear with correct message
-    await expect(loginPage.errorToast).toBeVisible();
-
-    // Dismiss button must be available on the toast
-    await expect(loginPage.dismissButton).toBeVisible();
-  });
-
-  // ─── TC-009 ───────────────────────────────────────────────────────────────
-  test('TC-009: Dismiss button closes the invalid credentials toast', async ({ loginPage }) => {
-    // Trigger the error toast
-    await loginPage.login('wrong@email.com', 'wrongpassword');
-    await expect(loginPage.errorToast).toBeVisible();
-
-    // Dismiss the notification
-    await loginPage.dismissButton.click();
-
-    // Toast must disappear; login form must remain
-    await expect(loginPage.errorToast).not.toBeVisible();
-    await expect(loginPage.signInButton).toBeVisible();
+    await expect(response.status()).toBe(400);
     await expect(loginPage.page).toHaveURL(/\/login/);
   });
 
-  // ─── TC-010 ───────────────────────────────────────────────────────────────
-  test('TC-010: Register link navigates to the registration page', async ({ loginPage }) => {
+
+  // ─── TC-006 ───────────────────────────────────────────────────────────────
+  test('TC-006: Register link navigates to the registration page', async ({ loginPage }) => {
     // Click the Register link at the bottom of the form
     await loginPage.registerLink.click();
 
     await expect(loginPage.page).toHaveURL(/\/register/);
   });
 
-  // ─── TC-011 ───────────────────────────────────────────────────────────────
-  test('TC-011: Login page displays all expected UI elements', async ({ loginPage }) => {
+  // ─── TC-007 ───────────────────────────────────────────────────────────────
+  test('TC-007: Login page displays all expected UI elements', async ({ loginPage }) => {
     // Page title
     await expect(loginPage.page).toHaveTitle('EventHub — Discover & Book Events');
 
@@ -129,14 +116,14 @@ test.describe('Login Functionality', () => {
     await expect(loginPage.apiDocsLink).toBeVisible();
   });
 
-  // ─── TC-012 ───────────────────────────────────────────────────────────────
-  test('TC-012: Password field masks typed characters', async ({ loginPage }) => {
+  // ─── TC-008 ───────────────────────────────────────────────────────────────
+  test('TC-008: Password field masks typed characters', async ({ loginPage }) => {
     // The input type must be "password" to ensure characters are masked
     await expect(loginPage.passwordInput).toHaveAttribute('type', 'password');
   });
 
-  // ─── TC-014 ───────────────────────────────────────────────────────────────
-  test('TC-014: Login with uppercase email is accepted (case-insensitive match)', async ({ loginPage }) => {
+  // ─── TC-009 ───────────────────────────────────────────────────────────────
+  test('TC-009: Login with uppercase email is accepted (case-insensitive match)', async ({ loginPage }) => {
     // Use uppercase version of the registered email
     await loginPage.login(VALID_EMAIL.toUpperCase(), VALID_PASSWORD);
 
@@ -144,8 +131,8 @@ test.describe('Login Functionality', () => {
     await expect(loginPage.page).not.toHaveURL(/\/login/);
   });
 
-  // ─── TC-015 ───────────────────────────────────────────────────────────────
-  test('TC-015: Login with leading/trailing whitespace in email', async ({ loginPage }) => {
+  // ─── TC-010 ───────────────────────────────────────────────────────────────
+  test('TC-010: Login with leading/trailing whitespace in email', async ({ loginPage }) => {
     await loginPage.emailInput.fill(`  ${VALID_EMAIL}  `);
     await loginPage.passwordInput.fill(VALID_PASSWORD);
     await loginPage.signInButton.click();

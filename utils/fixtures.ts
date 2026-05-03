@@ -17,11 +17,11 @@ export const test = base.extend<MyFixtures>
     await loginPage.goToLogin();
     await use(loginPage);
     // Navigate back to login page after test to ensure next test starts clean
-    try {
-      await loginPage.logout();
-    } catch (err) {
-      // ignore errors during logout to avoid teardown failures when logout button is absent
-    }
+    // try {
+    //   await loginPage.logout();
+    // } catch (err) {
+    //   // ignore errors during logout to avoid teardown failures when logout button is absent
+    // }
   },
 
   eventsPage: async({ page }, use) =>{
